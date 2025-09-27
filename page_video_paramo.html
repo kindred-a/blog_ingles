@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Almorzadero Páramo: A High-Altitude Gem in Colombia | Personal Blog</title>
+    <style>
+        /* Variables de colores */
+        :root {
+            --primary: #2e7d32;
+            --secondary: #1b5e20;
+            --accent: #4caf50;
+            --light: #f1f8e9;
+            --dark: #1b5e20;
+            --gray: #455a64;
+            --success: #388e3c;
+        }
+        
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 1.5rem;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Navegación */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Contenido principal */
+        main {
+            padding: 3rem 0;
+        }
+        
+        .article-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .article-category {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+            gap: 1rem;
+        }
+        
+        .article-content {
+            background-color: white;
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 3rem;
+        }
+        
+        .article-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        
+        .article-section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .article-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 0.5rem;
+        }
+        
+        .article-section p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+        }
+        
+        .highlight-box {
+            background-color: #e8f5e9;
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .fact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .fact-card {
+            background-color: #f1f8e9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .fact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .fact-card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        /* Estilos del reproductor de video */
+        .video-player {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        
+        .video-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #81c784 0%, #4caf50 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border-radius: 8px;
+        }
+        
+        .video-placeholder-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .video-description {
+            margin-top: 1.5rem;
+            color: var(--gray);
+            font-style: italic;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 1rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+            
+            .article-title {
+                font-size: 2rem;
+            }
+            
+            .article-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .article-image {
+                height: 250px;
+            }
+            
+            .fact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <img src="assets/_DSC0929.jpg" alt="Profile picture" class="profile-img">
+            <h1>Jaime Garcia</h1>
+            <p class="tagline">Exploring ideas, critical thinking, and media literacy in the digital age</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo"><i class="icon">✍️</i> Critical Thoughts</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="index.html">Blog</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <main>
+            <div class="article-header">
+                <span class="article-category">GA2-240202501-AA2-EV02</span>
+                <h1 class="article-title">The Almorzadero Páramo: A High-Altitude Gem in Colombia</h1>
+                <div class="article-meta">
+                    <span>•</span>
+                    <span>7 min read</span>
+                    <span>•</span>
+                    <span>Video available</span>
+                </div>
+            </div>
+            
+            <article class="article-content">
+                <img src="https://plus.unsplash.com/premium_photo-1669863279996-86d6e89aa870?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Almorzadero Páramo" class="article-image">
+                
+                <!-- Reproductor de video -->
+                <div class="video-player">
+                    <h3 class="video-title">Discovering the Almorzadero Páramo</h3>
+                    
+                    <div class="video-container">
+                        <div class="video-wrapper">
+                            <video controls width="100%">
+                                <source src="assets/Presentación. GA2-240202501-AA2-EV02 edit.mp4" type="video/mp4">
+                                Tu navegador no soporta el elemento video.
+                            </video>
+                       <!--    <div class="video-placeholder">
+                                <div class="video-placeholder-icon">🎥</div>
+                                <h3>Video: The Almorzadero Páramo</h3>
+                                <p>Video player placeholder - insert your video here</p>
+                            </div>--> 
+                        </div>
+                    </div>
+                    
+                    <p class="video-description">A visual journey through the stunning landscapes of the Almorzadero Páramo</p>
+                </div>
+                
+                <div class="article-section">
+                    <h2>Introduction</h2>
+                    <p>Located in the Eastern mountain range of the Colombian Andes, the Almorzadero Páramo is a true natural treasure. Covering parts of the departments of Norte de Santander, Santander, and Boyacá, this high-altitude ecosystem is far more than just a beautiful landscape—it's a vital source of life.</p>
+                </div>
+                
+                <div class="article-section">
+                    <h2>The Unique Páramo Ecosystem</h2>
+                    <p>The páramo is a unique and fragile biome, characterized by its cold, misty climate and distinctive vegetation. The most iconic plant is the "frailejón" (Espeletia), a majestic species that looks like it belongs to another world.</p>
+                    
+                    <div class="highlight-box">
+                        <p>These plants play a crucial role in the páramo's function, as their fuzzy leaves capture moisture from the fog, helping to form water that feeds the region's rivers and streams. In fact, Almorzadero is a key water source for the surrounding communities, making its conservation a matter of great importance.</p>
+                    </div>
+                </div>
+                
+                <div class="fact-grid">
+                    <div class="fact-card">
+                        <div class="fact-icon">🏔️</div>
+                        <h3>Altitude</h3>
+                        <p>3,000 - 4,500 meters above sea level</p>
+                    </div>
+                    
+                    <div class="fact-card">
+                        <div class="fact-icon">💧</div>
+                        <h3>Water Source</h3>
+                        <p>Provides water for multiple communities</p>
+                    </div>
+                    
+                    <div class="fact-card">
+                        <div class="fact-icon">🌱</div>
+                        <h3>Unique Flora</h3>
+                        <p>Home to the iconic frailejón plants</p>
+                    </div>
+                    
+                    <div class="fact-card">
+                        <div class="fact-icon">🦅</div>
+                        <h3>Biodiversity</h3>
+                        <p>Habitat for specialized high-altitude species</p>
+                    </div>
+                </div>
+                
+                <div class="article-section">
+                    <h2>Natural Beauty and Significance</h2>
+                    <p>Beyond its hydrological value, the Almorzadero Páramo is a place of stunning, rugged beauty. Its landscape is a mosaic of open plains, rocky outcrops, and wetlands, all set against a backdrop of dramatic mountain peaks. The air is crisp and clean, and the silence is often broken only by the sound of the wind or the call of a native bird.</p>
+                    
+                    <p>A visit to the Almorzadero Páramo is an unforgettable experience, offering a glimpse into a world of pristine nature and unparalleled tranquility. It serves as a powerful reminder of Colombia's incredible biodiversity and the urgent need to preserve these precious environments for future generations.</p>
+                </div>
+                
+                <div class="article-section">
+                    <h2>Conservation Challenges</h2>
+                    <p>Unfortunately, like many high-altitude ecosystems, the Almorzadero Páramo is facing serious threats from human activity, including agricultural expansion, deforestation, and climate change. Protecting this delicate balance is a challenge, but efforts are underway to raise awareness and promote sustainable practices.</p>
+                    
+                    <div class="highlight-box">
+                        <p>The conservation of páramos like Almorzadero is crucial not only for their unique biodiversity but also for their role as water regulators that supply millions of people in Colombia.</p>
+                    </div>
+                </div>
+                
+                <div class="article-section">
+                    <h2>Conclusion</h2>
+                    <p>The Almorzadero Páramo represents one of Colombia's most valuable natural treasures. As a vital water source and a unique ecosystem, its protection is essential for both environmental sustainability and human wellbeing. Through education, sustainable tourism, and conservation efforts, we can ensure that this high-altitude gem continues to thrive for generations to come.</p>
+                </div>
+            </article>
+        </main>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>Critical Thoughts</h3>
+                <p>A blog dedicated to exploring critical thinking, media literacy, and meaningful ideas.</p>
+                <ul class="social-links">
+                    <li><a href="#" title="Twitter">🐦</a></li>
+                    <li><a href="#" title="LinkedIn">💼</a></li>
+                    <li><a href="#" title="Instagram">📷</a></li>
+                    <li><a href="#" title="YouTube">📺</a></li>
+                </ul>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 SENA ADSO</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script para el reproductor de video (cuando se use un elemento video nativo)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Este código se activaría si estuvieras usando el elemento <video> de HTML5
+            // Para videos embebidos (YouTube/Vimeo), el reproductor viene con sus propios controles
+            
+            // Ejemplo de cómo integrar un video de YouTube:
+            /*
+            <div class="video-wrapper">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/TU_VIDEO_ID" 
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
+                gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            */
+            
+            // Ejemplo de cómo integrar un video con el elemento video de HTML5:
+            /*
+            <div class="video-wrapper">
+                <video controls width="100%">
+                    <source src="ruta/a/tu/video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            */
+        });
+    </script>
+</body>
+</html>

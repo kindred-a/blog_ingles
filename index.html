@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Blog | Critical Thinking & Media Literacy</title>
+    <style>
+        /* Variables de colores */
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #7209b7;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #4cc9f0;
+        }
+        
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 1.5rem;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Navegación */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Contenido principal */
+        main {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            padding: 3rem 0;
+        }
+        
+        /* Entradas del blog */
+        .blog-posts {
+            display: grid;
+            gap: 2.5rem;
+        }
+        
+        .post {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .post:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .post-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .post-content {
+            padding: 2rem;
+        }
+        
+        .post-category {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .post-title {
+            font-size: 1.7rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            line-height: 1.3;
+        }
+        
+        .post-excerpt {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+        
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+            padding-top: 1.5rem;
+        }
+        
+        .read-more {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .read-more:hover {
+            color: var(--secondary);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* Estilos para tipos de contenido */
+        .content-types {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .content-type {
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.8rem;
+            background: #f0f0f0;
+            padding: 0.3rem 0.7rem;
+            border-radius: 15px;
+            gap: 0.3rem;
+        }
+        
+        .pdf { background: #ffebee; color: #c62828; }
+        .video { background: #e3f2fd; color: #1565c0; }
+        .audio { background: #f3e5f5; color: #7b1fa2; }
+        .text { background: #e8f5e8; color: #2e7d32; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 1rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+            
+            .post-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+        
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .post {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <img src="assets/_DSC0929.jpg" alt="Profile picture" class="profile-img">
+            <h1>Jaime Garcia</h1>
+            <p class="tagline">Exploring ideas, critical thinking, and media literacy in the digital age</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container nav-container">
+            <div class="logo"><i class="icon">✍️</i> Critical Thoughts</div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <main>
+            <section class="blog-posts">
+                <!-- Entrada 1: Pensamiento Crítico y Alfabetización Mediática -->
+                <article class="post">
+                    <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Critical Thinking" class="post-image">
+                    <div class="post-content">
+                        <span class="post-category">Critical Thinking</span>
+                        <h2 class="post-title">Critical Thinking and Media Literacy in the Digital Age</h2>
+                        <p class="post-excerpt">In an era of information overload, developing critical thinking skills is more important than ever. This post explores how media literacy empowers us to navigate the digital landscape, distinguish facts from opinions, and become responsible consumers of information.</p>
+                        <div class="post-meta">
+                            <div class="content-types">
+                            </div>
+                            <a href="page_critical_thinking.html" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Entrada 2: Crimen y Castigo -->
+                <article class="post">
+                    <img src="https://images.unsplash.com/photo-1722864671434-cedda1132d82?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Crime and Punishment" class="post-image">
+                    <div class="post-content">
+                        <span class="post-category"> Audio Presentation GA3-240202501-AA1-EV02.</span>
+                        <h2 class="post-title">My Work and School Life</h2>
+                        <p class="post-excerpt">This audio script shares the speaker’s personal approach to work and university life, emphasizing organization, quality, and continuous improvement in both settings.</p>
+                        <div class="post-meta">
+                            <div class="content-types">
+                                <span class="content-type text">Text</span>
+                                <span class="content-type audio">Audio</span>
+                            </div>
+                            <a href="page_principles_for_success.html" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Entradas adicionales -->
+                <article class="post">
+                    <img src="https://plus.unsplash.com/premium_photo-1669863279996-86d6e89aa870?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Technology" class="post-image">
+                    <div class="post-content">
+                        <span class="post-category">GA2-240202501-AA2-EV02</span>
+                        <h2 class="post-title">The Almorzadero Páramo: A High-Altitude Gem in Colombia</h2>
+                        <p class="post-excerpt">Almorzadero Páramo, a high-altitude ecosystem in the Colombian Andes. It highlights the páramo's crucial role as a water source and features its unique plant life, like the frailejón. The text also touches on its beautiful scenery and the environmental threats it faces. Its purpose is to showcase the páramo's value and the urgent need for its preservation..</p>
+                        <div class="post-meta">
+                            <div class="content-types">
+                                <span class="content-type video">Video</span>
+                                <span class="content-type text">Text</span>
+                            </div>
+                            <a href="page_video_paramo.html" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="post">
+                    <img src="https://images.unsplash.com/photo-1526698905402-e13b880ad864?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Psychology" class="post-image">
+                    <div class="post-content">
+                        <span class="post-category">GA3-240202501-AA2-EV02 Podcast</span>
+                        <h2 class="post-title">The Adaptable Journey</h2>
+                        <p class="post-excerpt">Join Jaime Garcia as he explores the unique intersection of software development and audiovisual production. In this episode, Jaime discusses the challenges of balancing a demanding dual career, the importance of avoiding burnout, and how adaptability and self-discipline are key to professional success. He shares how his coding skills enhance his creative work and offers practical advice on embracing flexibility to find new opportunities and forge your own path.</p>
+                        <div class="post-meta">
+                            <div class="content-types">
+                                <span class="content-type pdf">PDF</span>
+                                <span class="content-type audio">Audio</span>
+                            </div>
+                            <a href="page_adaptable_journey.html" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="post">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Education" class="post-image">
+                    <div class="post-content">
+                        <span class="post-category">Interactive Mind Map</span>
+                        <h2 class="post-title">My Personal Learning Environment (PLE)</h2>
+                        <p class="post-excerpt">A Personal Learning Environment (PLE) is a customized approach to learning that leverages various tools, resources, and strategies tailored to an individual's needs and goals. My PLE focuses on enhancing my English language skills while balancing my studies in software development and work in audio-visual production.</p>
+                        <div class="post-meta">
+                            <div class="content-types">
+                                <span class="content-type text">Text</span>
+                            </div>
+                            <a href="page_ple.html" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="post">
+                    <img src="https://plus.unsplash.com/premium_photo-1661344287754-5b54e8feb18b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Media" class="post-image">
+                    <div class="post-content">
+                        <span class="post-category">GA2 240202501 AA2 EV03</span>
+                        <h2 class="post-title">Software Developer Postulation Models</h2>
+                        <p class="post-excerpt">This page contains comprehensive resources and templates for software developer job applications. Here you will find professionally designed postulation models, cover letter templates, and resume formats specifically tailored for software development positions. The provided PDF documents can be viewed directly in your browser and downloaded for customization according to your specific needs and experiences.</p>
+                        <div class="post-meta">
+                            <div class="content-types">
+                                <span class="content-type video">Text</span>
+                                <span class="content-type pdf">PDF</span>
+                            </div>
+                            <a href="page_software_postulation.html" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="post">
+                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Philosophy" class="post-image">
+                    <div class="post-content">
+                        <span class="post-category">Philosophy</span>
+                        <h2 class="post-title">The Socratic Method: Questioning as a Path to Wisdom</h2>
+                        <p class="post-excerpt">Explore the ancient art of Socratic questioning and its modern applications. This post examines how thoughtful inquiry can lead to deeper understanding and more robust critical thinking skills.</p>
+                        <div class="post-meta">
+                            <div class="content-types">
+                                <span class="content-type audio">Audio</span>
+                                <span class="content-type text">Text</span>
+                            </div>
+                            <a href="#" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+            </section>
+        </main>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>Critical Thoughts</h3>
+                <p>A blog dedicated to exploring critical thinking, media literacy, and meaningful ideas.</p>
+                <ul class="social-links">
+                    <li><a href="#" title="Twitter">🐦</a></li>
+                    <li><a href="#" title="LinkedIn">💼</a></li>
+                    <li><a href="#" title="Instagram">📷</a></li>
+                    <li><a href="#" title="YouTube">📺</a></li>
+                </ul>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 SENA ADSO</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Learning Environment (PLE) | Personal Blog</title>
+    <style>
+        /* Variables de colores */
+        :root {
+            --primary: #1565c0;
+            --secondary: #0d47a1;
+            --accent: #42a5f5;
+            --light: #e3f2fd;
+            --dark: #0d47a1;
+            --gray: #455a64;
+            --success: #29b6f6;
+        }
+        
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 1.5rem;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Navegación */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Contenido principal */
+        main {
+            padding: 3rem 0;
+        }
+        
+        .article-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .article-category {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+            gap: 1rem;
+        }
+        
+        .article-content {
+            background-color: white;
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 3rem;
+        }
+        
+        .article-section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .article-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 0.5rem;
+        }
+        
+        .article-section p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+        }
+        
+        /* Estilos para el visualizador de imagen */
+        .image-viewer {
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+        
+        .viewer-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            background-color: #f5f5f5;
+        }
+        
+        .mind-map-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s;
+            cursor: zoom-in;
+        }
+        
+        .image-zoomed {
+            cursor: zoom-out;
+        }
+        
+        .zoom-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .zoom-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .zoom-btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        .zoom-info {
+            margin-top: 0.5rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Estilos para la representación textual del mapa mental */
+        .mind-map-text {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .mind-map-central {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+        
+        .mind-map-branches {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .branch {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .branch-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .branch-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        
+        .branch-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        .branch-items {
+            list-style-type: none;
+        }
+        
+        .branch-item {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .branch-item:before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .sub-items {
+            list-style-type: none;
+            margin-top: 0.5rem;
+            margin-left: 1rem;
+        }
+        
+        .sub-item {
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 1rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+            
+            .article-title {
+                font-size: 2rem;
+            }
+            
+            .article-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .image-container {
+                height: 300px;
+            }
+            
+            .mind-map-branches {
+                grid-template-columns: 1fr;
+            }
+            
+            .zoom-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <img src="assets/_DSC0929.jpg" alt="Profile picture" class="profile-img">
+            <h1>Jaime Garcia</h1>
+            <p class="tagline">Software Analysis & Development Student | Lifelong Learner</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo"><i class="icon">🧠</i> My PLE</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="index.html">Blog</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <main>
+            <div class="article-header">
+                <span class="article-category">Learning & Development</span>
+                <h1 class="article-title">My Personal Learning Environment (PLE)</h1>
+                <div class="article-meta">
+                    
+                    <span>•</span>
+                    <span>Interactive Mind Map</span>
+                </div>
+            </div>
+            
+            <article class="article-content">
+                <div class="article-section">
+                    <h2>Introduction</h2>
+                    <p>A Personal Learning Environment (PLE) is a customized approach to learning that leverages various tools, resources, and strategies tailored to an individual's needs and goals. My PLE focuses on enhancing my English language skills while balancing my studies in software development and work in audio-visual production.</p>
+                    
+                    <p>This mental map represents the comprehensive system I've developed to support my continuous learning journey, integrating digital tools, learning strategies, and practical applications.</p>
+                </div>
+                
+                <!-- Visualizador de imagen del mapa mental -->
+                <div class="image-viewer">
+                    <h3 class="viewer-title">Interactive Mind Map</h3>
+                    <div class="image-container">
+                        <img src="assets/My Personal Learning Environment (PLE).png" alt="My Personal Learning Environment Mind Map" class="mind-map-image" id="mindMapImage">
+                        <div id="imageFallback" style="display: none; text-align: center; padding: 2rem;">
+                            <p>Image not found: assets/my-ple-mind-map.png</p>
+                            <p>Please check the file path or use the text version below.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="zoom-controls">
+                        <button class="zoom-btn" id="zoomInBtn">Zoom In</button>
+                        <button class="zoom-btn" id="zoomOutBtn">Zoom Out</button>
+                        <button class="zoom-btn" id="resetZoomBtn">Reset Zoom</button>
+                    </div>
+                    
+                    <p class="zoom-info">Click on the image to zoom in/out or use the controls above</p>
+                </div>
+                
+                <!-- Representación textual del mapa mental -->
+                <div class="mind-map-text">
+                    <div class="mind-map-central">
+                        <span class="branch-icon">🌐</span> My Personal Learning Environment (PLE)
+                    </div>
+                    
+                    <div class="mind-map-branches">
+                        <!-- Rama 1: Learning Resources -->
+                        <div class="branch">
+                            <div class="branch-header">
+                                <span class="branch-icon">📚</span>
+                                <h3 class="branch-title">Learning Resources</h3>
+                            </div>
+                            <ul class="branch-items">
+                                <li class="branch-item">Online Platforms
+                                    <ul class="sub-items">
+                                        <li class="sub-item">Duolingo</li>
+                                        <li class="sub-item">BBC Learning English</li>
+                                        <li class="sub-item">Coursera</li>
+                                    </ul>
+                                </li>
+                                <li class="branch-item">Books & Articles
+                                    <ul class="sub-items">
+                                        <li class="sub-item">Grammar Guides</li>
+                                        <li class="sub-item">Bilingual Dictionaries</li>
+                                    </ul>
+                                </li>
+                                <li class="branch-item">Multimedia
+                                    <ul class="sub-items">
+                                        <li class="sub-item">Podcasts</li>
+                                        <li class="sub-item">YouTube tutorials</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Rama 2: Learning Strategies -->
+                        <div class="branch">
+                            <div class="branch-header">
+                                <span class="branch-icon">🎯</span>
+                                <h3 class="branch-title">Learning Strategies</h3>
+                            </div>
+                            <ul class="branch-items">
+                                <li class="branch-item">Writing Practice
+                                    <ul class="sub-items">
+                                        <li class="sub-item">Journals in English</li>
+                                        <li class="sub-item">Summaries of readings</li>
+                                    </ul>
+                                </li>
+                                <li class="branch-item">Speaking Practice
+                                    <ul class="sub-items">
+                                        <li class="sub-item">Role-plays</li>
+                                        <li class="sub-item">Voice recording apps</li>
+                                    </ul>
+                                </li>
+                                <li class="branch-item">Listening Practice
+                                    <ul class="sub-items">
+                                        <li class="sub-item">Audiobooks</li>
+                                        <li class="sub-item">English news</li>
+                                    </ul>
+                                </li>
+                                <li class="branch-item">Reading Practice
+                                    <ul class="sub-items">
+                                        <li class="sub-item">Technical articles</li>
+                                        <li class="sub-item">Workplace documents</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Rama 3: Digital Tools -->
+                        <div class="branch">
+                            <div class="branch-header">
+                                <span class="branch-icon">💻</span>
+                                <h3 class="branch-title">Digital Tools</h3>
+                            </div>
+                            <ul class="branch-items">
+                                <li class="branch-item">Productivity Apps
+                                    <ul class="sub-items">
+                                        <li class="sub-item">Notion (study notes)</li>
+                                        <li class="sub-item">Trello (task organization)</li>
+                                    </ul>
+                                </li>
+                                <li class="branch-item">Collaboration Tools
+                                    <ul class="sub-items">
+                                        <li class="sub-item">Slack</li>
+                                        <li class="sub-item">Microsoft Teams</li>
+                                    </ul>
+                                </li>
+                                <li class="branch-item">Social Networks
+                                    <ul class="sub-items">
+                                        <li class="sub-item">LinkedIn (professional English)</li>
+                                        <li class="sub-item">Reddit (discussion forums)</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Rama 4: Motivation & Support -->
+                        <div class="branch">
+                            <div class="branch-header">
+                                <span class="branch-icon">🚀</span>
+                                <h3 class="branch-title">Motivation & Support</h3>
+                            </div>
+                            <ul class="branch-items">
+                                <li class="branch-item">Personal Goals
+                                    <ul class="sub-items">
+                                        <li class="sub-item">Improve workplace communication</li>
+                                        <li class="sub-item">Prepare for job opportunities abroad</li>
+                                    </ul>
+                                </li>
+                                <li class="branch-item">Learning Community
+                                    <ul class="sub-items">
+                                        <li class="sub-item">Study groups</li>
+                                        <li class="sub-item">Language exchange partners</li>
+                                    </ul>
+                                </li>
+                                <li class="branch-item">Self-motivation
+                                    <ul class="sub-items">
+                                        <li class="sub-item">Setting weekly objectives</li>
+                                        <li class="sub-item">Celebrating progress</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Rama 5: Workplace Application -->
+                        <div class="branch">
+                            <div class="branch-header">
+                                <span class="branch-icon">💼</span>
+                                <h3 class="branch-title">Workplace Application</h3>
+                            </div>
+                            <ul class="branch-items">
+                                <li class="branch-item">Professional Communication
+                                    <ul class="sub-items">
+                                        <li class="sub-item">Writing emails in English</li>
+                                        <li class="sub-item">Preparing reports</li>
+                                    </ul>
+                                </li>
+                                <li class="branch-item">Oral Communication
+                                    <ul class="sub-items">
+                                        <li class="sub-item">Meetings with clients</li>
+                                        <li class="sub-item">Presentations</li>
+                                    </ul>
+                                </li>
+                                <li class="branch-item">Technical Use
+                                    <ul class="sub-items">
+                                        <li class="sub-item">Reading documentation</li>
+                                        <li class="sub-item">Writing code comments in English</li>
+                                    </ul>
+                                </li>
+                                <li class="branch-item">Global Collaboration
+                                    <ul class="sub-items">
+                                        <li class="sub-item">Remote teamwork</li>
+                                        <li class="sub-item">Cross-cultural projects</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="article-section">
+                    <h2>How My PLE Supports My Goals</h2>
+                    <p>This structured approach to learning allows me to systematically develop the English language skills needed for both my academic pursuits and professional career. By integrating various resources and strategies, I can:</p>
+                    
+                    <ul>
+                        <li>Maintain consistent practice across different language skills (reading, writing, listening, speaking)</li>
+                        <li>Apply learning directly to real-world workplace scenarios</li>
+                        <li>Leverage technology to enhance efficiency and effectiveness</li>
+                        <li>Stay motivated through clear goals and community support</li>
+                    </ul>
+                </div>
+                
+                <div class="article-section">
+                    <h2>Continuous Improvement</h2>
+                    <p>A PLE is not static; it evolves as my needs and goals change. I regularly assess which tools and strategies are most effective and make adjustments accordingly. This adaptive approach ensures that my learning environment remains relevant and supportive of my ongoing development.</p>
+                </div>
+            </article>
+        </main>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>My Learning Journey</h3>
+                <p>Documenting my path through software development, language learning, and personal growth.</p>
+                <ul class="social-links">
+                    <li><a href="#" title="LinkedIn">💼</a></li>
+                    <li><a href="#" title="GitHub">💻</a></li>
+                    <li><a href="#" title="Twitter">🐦</a></li>
+                    <li><a href="#" title="YouTube">📺</a></li>
+                </ul>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 SENA ADSO</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script para el zoom de la imagen
+        document.addEventListener('DOMContentLoaded', function() {
+            const image = document.getElementById('mindMapImage');
+            const zoomInBtn = document.getElementById('zoomInBtn');
+            const zoomOutBtn = document.getElementById('zoomOutBtn');
+            const resetZoomBtn = document.getElementById('resetZoomBtn');
+            const imageFallback = document.getElementById('imageFallback');
+            
+            let scale = 1;
+            const minScale = 0.5;
+            const maxScale = 3;
+            const scaleStep = 0.25;
+            
+            // Verificar si la imagen se carga correctamente
+            image.onerror = function() {
+                image.style.display = 'none';
+                imageFallback.style.display = 'block';
+            };
+            
+            // Función para aplicar el zoom
+            function applyZoom() {
+                image.style.transform = `scale(${scale})`;
+                image.classList.toggle('image-zoomed', scale !== 1);
+            }
+            
+            // Zoom in
+            zoomInBtn.addEventListener('click', function() {
+                if (scale < maxScale) {
+                    scale += scaleStep;
+                    applyZoom();
+                }
+            });
+            
+            // Zoom out
+            zoomOutBtn.addEventListener('click', function() {
+                if (scale > minScale) {
+                    scale -= scaleStep;
+                    applyZoom();
+                }
+            });
+            
+            // Reset zoom
+            resetZoomBtn.addEventListener('click', function() {
+                scale = 1;
+                applyZoom();
+            });
+            
+            // Zoom con la rueda del mouse
+            image.addEventListener('wheel', function(e) {
+                e.preventDefault();
+                
+                if (e.deltaY < 0) {
+                    // Scroll up - zoom in
+                    if (scale < maxScale) {
+                        scale += scaleStep;
+                    }
+                } else {
+                    // Scroll down - zoom out
+                    if (scale > minScale) {
+                        scale -= scaleStep;
+                    }
+                }
+                
+                applyZoom();
+            });
+            
+            // Zoom al hacer clic en la imagen
+            image.addEventListener('click', function() {
+                if (scale === 1) {
+                    // Si está en zoom normal, hacer zoom in
+                    scale = 1.5;
+                } else {
+                    // Si está zoomed, volver al normal
+                    scale = 1;
+                }
+                applyZoom();
+            });
+            
+            // Permitir arrastrar la imagen cuando está zoomed
+            let isDragging = false;
+            let startX, startY, scrollLeft, scrollTop;
+            
+            image.addEventListener('mousedown', function(e) {
+                if (scale !== 1) {
+                    isDragging = true;
+                    startX = e.pageX - image.offsetLeft;
+                    startY = e.pageY - image.offsetTop;
+                    scrollLeft = image.scrollLeft;
+                    scrollTop = image.scrollTop;
+                    image.style.cursor = 'grabbing';
+                }
+            });
+            
+            document.addEventListener('mouseup', function() {
+                isDragging = false;
+                if (scale !== 1) {
+                    image.style.cursor = 'zoom-out';
+                }
+            });
+            
+            document.addEventListener('mousemove', function(e) {
+                if (!isDragging) return;
+                e.preventDefault();
+                const x = e.pageX - image.offsetLeft;
+                const y = e.pageY - image.offsetTop;
+                const walkX = (x - startX) * 2;
+                const walkY = (y - startY) * 2;
+                image.scrollLeft = scrollLeft - walkX;
+                image.scrollTop = scrollTop - walkY;
+            });
+        });
+    </script>
+</body>
+</html>

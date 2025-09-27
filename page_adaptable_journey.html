@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Adaptable Journey Podcast | Personal Blog</title>
+    <style>
+        /* Variables de colores */
+        :root {
+            --primary: #7b1fa2;
+            --secondary: #6a1b9a;
+            --accent: #9c27b0;
+            --light: #f3e5f5;
+            --dark: #4a148c;
+            --gray: #455a64;
+            --success: #8e24aa;
+        }
+        
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #fafafa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 1.5rem;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Navegación */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Contenido principal */
+        main {
+            padding: 3rem 0;
+        }
+        
+        .article-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .article-category {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+            gap: 1rem;
+        }
+        
+        .article-content {
+            background-color: white;
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 3rem;
+        }
+        
+        .article-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        
+        .article-section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .article-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 0.5rem;
+        }
+        
+        .article-section p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+        }
+        
+        .quote {
+            background-color: #f3e5f5;
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .highlight-box {
+            background-color: #f3e5f5;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        /* Estilos del reproductor de audio */
+        .audio-player {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        
+        .audio-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .audio-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .audio-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+        
+        .play-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            margin: 0 1rem;
+        }
+        
+        .play-btn:hover {
+            background-color: var(--secondary);
+            transform: scale(1.05);
+        }
+        
+        .progress-container {
+            flex-grow: 1;
+            max-width: 400px;
+            margin: 0 1rem;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background-color: #e0e0e0;
+            border-radius: 3px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: width 0.1s;
+        }
+        
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .volume-control {
+            display: flex;
+            align-items: center;
+            margin: 0 1rem;
+        }
+        
+        .volume-icon {
+            margin-right: 0.5rem;
+            color: var(--gray);
+        }
+        
+        .volume-slider {
+            width: 80px;
+        }
+        
+        .transcript {
+            margin-top: 2rem;
+            text-align: left;
+        }
+        
+        .transcript h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .transcript-content {
+            background-color: #fafafa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 1rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+            
+            .article-title {
+                font-size: 2rem;
+            }
+            
+            .article-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .article-image {
+                height: 250px;
+            }
+            
+            .audio-controls {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .progress-container {
+                width: 100%;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <img src="assets/_DSC0929.jpg" alt="Profile picture" class="profile-img">
+            <h1>Jaime Garcia</h1>
+            <p class="tagline">Exploring ideas, critical thinking, and media literacy in the digital age</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo"><i class="icon">🎙️</i> The Adaptable Journey</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="index.html">Blog</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <main>
+            <div class="article-header">
+                <span class="article-category">GA3-240202501-AA2-EV02 Podcast</span>
+                <h1 class="article-title">The Adaptable Journey: Balancing Tech and Creativity</h1>
+                <div class="article-meta">
+                  
+                    <span>•</span>
+                    <span>8 min listen</span>
+                    <span>•</span>
+                    <span>Episode 01</span>
+                </div>
+            </div>
+            
+            <article class="article-content">
+                <img src="https://images.unsplash.com/photo-1526698905402-e13b880ad864?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Tech and Creativity Balance" class="article-image">
+                
+                <!-- Reproductor de audio -->
+                <div class="audio-player">
+                    <div class="audio-icon">🎧</div>
+                    <h3 class="audio-title">The Adaptable Journey - Episode 01</h3>
+                    <p>Listen to Jaime Garcia's personal journey balancing software development and audio-visual production</p>
+                    
+                    <div class="audio-controls">
+                        <button class="play-btn" id="playPauseBtn">▶</button>
+                        
+                        <div class="progress-container">
+                            <div class="progress-bar" id="progressBar">
+                                <div class="progress" id="progress"></div>
+                            </div>
+                            <div class="time-display">
+                                <span id="currentTime">0:00</span>
+                                <span id="duration">0:00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="volume-control">
+                            <span class="volume-icon">🔊</span>
+                            <input type="range" min="0" max="100" value="80" class="volume-slider" id="volumeSlider">
+                        </div>
+                    </div>
+                    
+                    <audio id="audioElement">
+                        <!-- En un caso real, aquí iría la URL del archivo de audio -->
+                        <source src="assets/GA3-240202501-AA2-EV02 Audio.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    
+                    <div class="transcript">
+                        <h3>Episode Transcript</h3>
+                        <div class="transcript-content">
+                            <p><strong>Jaime Garcia:</strong> Hello, everyone! Welcome to The Adaptable Journey, the podcast. My name is Jaime Garcia, and today I want to talk about my own unique path. I'm studying software analysis and development, but I also work in audio-visual production.</p>
+                            
+                            <p>Balancing these two fields can be a challenge. You know, burnout is a real health problem for a lot of people in tech and creative jobs. I have to be very careful to take care of myself. If I didn't set my own rules, I would feel completely exhausted all the time.</p>
+                            
+                            <p>So, I must be proactive. I tell myself I need to stop working at a certain time every evening. I make sure to discipline myself to take breaks. It's about showing self-direction. If you don't do it for yourself, nobody else will.</p>
+                            
+                            <p>My journey is all about flexibility and adaptability. I have to go with the flow because the creative and tech worlds change fast. If I had only focused on one field, I would have missed out on some amazing opportunities. The truth is, if I hadn't learned to code, I wouldn't have been able to create a lot of the visual effects I use now. My software skills help me solve problems faster in my production work.</p>
+                            
+                            <p>Looking to the future, I see so many possibilities. I believe that if I am an expert in both fields, I will be in high demand. For example, if I were to start a new project tomorrow, it would definitely combine interactive software with stunning video.</p>
+                            
+                            <p>My final advice is this: you must be a chameleon. You need to be flexible and adapt to your environment. Don't be afraid to mix your skills. That's how you find new solutions and create your own path.</p>
+                            
+                            <p>That's all for this episode of "The Adaptable Journey." Thank you for listening, and remember: stay adaptable, and keep growing!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="article-section">
+                    <h2>About This Episode</h2>
+                    <p>In this inaugural episode of "The Adaptable Journey," host Jaime Garcia shares his personal experience balancing two seemingly different worlds: software development and audio-visual production. He discusses the challenges, rewards, and strategies for thriving in multiple professional domains.</p>
+                    
+                    <div class="highlight-box">
+                        <p><strong>Key Takeaways:</strong> The importance of self-care in demanding fields, the value of interdisciplinary skills, and practical advice for maintaining balance while pursuing multiple passions.</p>
+                    </div>
+                </div>
+                
+                <div class="article-section">
+                    <h2>Topics Covered</h2>
+                    <p><strong>1. The Challenge of Balance</strong> - How Jaime manages the demands of both software analysis and audio-visual production without burning out.</p>
+                    
+                    <p><strong>2. Self-Care Strategies</strong> - The importance of setting boundaries, taking breaks, and establishing a sustainable work rhythm.</p>
+                    
+                    <p><strong>3. The Power of Interdisciplinary Skills</strong> - How skills from one field can enhance performance in another, creating unique solutions.</p>
+                    
+                    <p><strong>4. Future Vision</strong> - Jaime's perspective on the growing demand for professionals who can bridge technical and creative domains.</p>
+                    
+                    <div class="quote">
+                        "You must be a chameleon. You need to be flexible and adapt to your environment. Don't be afraid to mix your skills."
+                    </div>
+                </div>
+                
+                <div class="article-section">
+                    <h2>About the Host</h2>
+                    <p>Jaime Garcia is a software analysis and development student with a passion for audio-visual production. His unique career path allows him to combine technical expertise with creative expression, resulting in innovative projects that bridge both worlds.</p>
+                    
+                    <p>Through "The Adaptable Journey" podcast, Jaime explores the intersections of technology, creativity, and personal growth, sharing insights from his own experiences and interviewing others who have forged unconventional career paths.</p>
+                </div>
+                
+                <div class="article-section">
+                    <h2>Subscribe & Follow</h2>
+                    <p>Never miss an episode of "The Adaptable Journey." Subscribe on your favorite podcast platform and follow Jaime on social media for updates, behind-the-scenes content, and additional resources.</p>
+                    
+                    <p><strong>Available on:</strong> Spotify, Apple Podcasts, Google Podcasts, and YouTube.</p>
+                </div>
+            </article>
+        </main>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>The Adaptable Journey</h3>
+                <p>A podcast exploring the intersections of technology, creativity, and personal growth.</p>
+                <ul class="social-links">
+                    <li><a href="#" title="Spotify">🎵</a></li>
+                    <li><a href="#" title="Apple Podcasts">🎧</a></li>
+                    <li><a href="#" title="YouTube">📺</a></li>
+                    <li><a href="#" title="Twitter">🐦</a></li>
+                </ul>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 SENA ADSO</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script para el reproductor de audio
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('audioElement');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const progress = document.getElementById('progress');
+            const progressBar = document.getElementById('progressBar');
+            const currentTimeEl = document.getElementById('currentTime');
+            const durationEl = document.getElementById('duration');
+            const volumeSlider = document.getElementById('volumeSlider');
+            
+            // Configurar el reproductor
+            function formatTime(seconds) {
+                let minutes = Math.floor(seconds / 60);
+                let secs = Math.floor(seconds % 60);
+                return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+            }
+            
+            // Actualizar la barra de progreso y el tiempo
+            function updateProgress() {
+                const { duration, currentTime } = audio;
+                const progressPercent = (currentTime / duration) * 100;
+                progress.style.width = `${progressPercent}%`;
+                
+                currentTimeEl.textContent = formatTime(currentTime);
+                
+                if (!isNaN(duration)) {
+                    durationEl.textContent = formatTime(duration);
+                }
+            }
+            
+            // Establecer el progreso al hacer clic en la barra
+            function setProgress(e) {
+                const width = this.clientWidth;
+                const clickX = e.offsetX;
+                const duration = audio.duration;
+                
+                audio.currentTime = (clickX / width) * duration;
+            }
+            
+            // Reproducir o pausar
+            function togglePlayPause() {
+                if (audio.paused) {
+                    audio.play();
+                    playPauseBtn.innerHTML = '❚❚'; // Icono de pausa
+                } else {
+                    audio.pause();
+                    playPauseBtn.innerHTML = '▶'; // Icono de play
+                }
+            }
+            
+            // Actualizar volumen
+            function setVolume() {
+                audio.volume = volumeSlider.value / 100;
+            }
+            
+            // Reiniciar cuando termine
+            audio.addEventListener('ended', function() {
+                playPauseBtn.innerHTML = '▶';
+                audio.currentTime = 0;
+            });
+            
+            // Event listeners
+            playPauseBtn.addEventListener('click', togglePlayPause);
+            audio.addEventListener('timeupdate', updateProgress);
+            progressBar.addEventListener('click', setProgress);
+            volumeSlider.addEventListener('input', setVolume);
+            
+            // Inicializar valores
+            durationEl.textContent = '4:30'; // Duración estimada del episodio
+        });
+    </script>
+</body>
+</html>

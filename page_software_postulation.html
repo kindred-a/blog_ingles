@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Developer Postulation | Professional Resources</title>
+    <style>
+        /* Variables de colores */
+        :root {
+            --primary: #1976d2;
+            --secondary: #1565c0;
+            --accent: #42a5f5;
+            --light: #e3f2fd;
+            --dark: #0d47a1;
+            --gray: #455a64;
+            --success: #4caf50;
+        }
+        
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fb;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 1.5rem;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Navegación */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Contenido principal */
+        main {
+            padding: 3rem 0;
+        }
+        
+        .article-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .article-category {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+            gap: 1rem;
+        }
+        
+        .article-content {
+            background-color: white;
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 3rem;
+        }
+        
+        .article-section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .article-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 0.5rem;
+        }
+        
+        .article-section p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+        }
+        
+        .intro-paragraph {
+            font-size: 1.1rem;
+            background-color: #f0f7ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary);
+        }
+        
+        /* Estilos para el visualizador de PDF */
+        .pdf-viewer {
+            margin: 2.5rem 0;
+        }
+        
+        .viewer-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+        }
+        
+        .viewer-title-icon {
+            margin-right: 0.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .pdf-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            background-color: #f5f5f5;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .pdf-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            color: #666;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .pdf-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .pdf-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .pdf-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.7rem 1.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .pdf-btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        .pdf-btn.secondary {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        
+        .pdf-btn.secondary:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .pdf-info {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Estilos para la lista de recursos */
+        .resources-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .resource-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .resource-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .resource-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .resource-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 1rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+            
+            .article-title {
+                font-size: 2rem;
+            }
+            
+            .article-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .pdf-container {
+                height: 400px;
+            }
+            
+            .pdf-controls {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .resources-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <img src="assets/_DSC0929.jpg" alt="Profile picture" class="profile-img">
+            <h1>Jaime Garcia</h1>
+            <p class="tagline">Exploring ideas, critical thinking, and media literacy in the digital age</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo"><i class="icon">💼</i> Dev Portfolio</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="index.html">Blog</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <main>
+            <div class="article-header">
+                <span class="article-category">GA2 240202501 AA2 EV03</span>
+                <h1 class="article-title">Software Developer Postulation</h1>
+                <div class="article-meta">
+                    <span>Professional Resources</span>
+                    <span>•</span>
+                    <span>PDF Templates Available</span>
+                </div>
+            </div>
+            
+            <article class="article-content">
+                <div class="intro-paragraph">
+                    <p>This page contains comprehensive resources and templates for software developer job applications. Here you will find professionally designed postulation models, cover letter templates, and resume formats specifically tailored for software development positions. The provided PDF documents can be viewed directly in your browser and downloaded for customization according to your specific needs and experiences.</p>
+                </div>
+                
+                <div class="article-section">
+                    <h2>Application Resources</h2>
+                    <p>Applying for software developer positions requires a strategic approach that highlights both technical competencies and problem-solving abilities. The resources on this page are designed to help you create compelling application materials that stand out to potential employers.</p>
+                    
+                    <p>Whether you're applying for entry-level positions or senior developer roles, these templates provide a solid foundation that you can adapt to showcase your unique skills and experiences.</p>
+                </div>
+                
+                <!-- Visualizador de PDF -->
+                <div class="pdf-viewer">
+                    <h3 class="viewer-title">
+                        <span class="viewer-title-icon">📄</span>
+                        Software Developer Application Templates
+                    </h3>
+                    
+                    <div class="pdf-container">
+                        <div class="pdf-placeholder" id="pdfPlaceholder">
+                            <div class="pdf-icon">📋</div>
+                            <h3>Software Developer Postulation Models</h3>
+                            <p>PDF document with application templates and examples</p>
+                            <p>File: assets/software-developer-postulation-models.pdf</p>
+                            <button class="pdf-btn" id="loadPdfBtn" style="margin-top: 1rem;">
+                                <span>Load PDF Document</span>
+                            </button>
+                        </div>
+                        <iframe id="pdfViewer" style="width: 100%; height: 100%; border: none; display: none;" 
+                                src="about:blank"></iframe>
+                    </div>
+                    
+                    <div class="pdf-controls">
+                        <div>
+                            <button class="pdf-btn" id="viewPdfBtn">
+                                <span>👁️</span> View PDF
+                            </button>
+                            <button class="pdf-btn secondary" id="downloadPdfBtn">
+                                <span>📥</span> Download PDF
+                            </button>
+                        </div>
+                        <div class="pdf-info">
+                            <span>Document: Software Developer Postulation Models.pdf</span>
+                            <span> | </span>
+                            <span>Size: 2.4 MB</span>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+            </article>
+        </main>
+    </div>
+    
+    <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <h3>Critical Thoughts</h3>
+                    <p>A blog dedicated to exploring critical thinking, media literacy, and meaningful ideas.</p>
+                    <ul class="social-links">
+                        <li><a href="#" title="Twitter">🐦</a></li>
+                        <li><a href="#" title="LinkedIn">💼</a></li>
+                        <li><a href="#" title="Instagram">📷</a></li>
+                        <li><a href="#" title="YouTube">📺</a></li>
+                    </ul>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2025 SENA ADSO</p>
+                </div>
+            </div>
+        </footer>
+
+    <script>
+        // Script para el visualizador de PDF
+        document.addEventListener('DOMContentLoaded', function() {
+            const pdfPlaceholder = document.getElementById('pdfPlaceholder');
+            const pdfViewer = document.getElementById('pdfViewer');
+            const loadPdfBtn = document.getElementById('loadPdfBtn');
+            const viewPdfBtn = document.getElementById('viewPdfBtn');
+            const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+            
+            const pdfUrl = 'assets/Evidencia GA2 240202501 AA2 EV03 documento escrito.pdf';
+            
+            // Cargar el PDF en el visor
+            loadPdfBtn.addEventListener('click', function() {
+                pdfViewer.src = pdfUrl + '#view=FitH';
+                pdfViewer.style.display = 'block';
+                pdfPlaceholder.style.display = 'none';
+                viewPdfBtn.textContent = '👁️ PDF Loaded';
+            });
+            
+            // Ver el PDF (alternar entre placeholder y visor)
+            viewPdfBtn.addEventListener('click', function() {
+                if (pdfViewer.style.display === 'none') {
+                    pdfViewer.src = pdfUrl + '#view=FitH';
+                    pdfViewer.style.display = 'block';
+                    pdfPlaceholder.style.display = 'none';
+                    viewPdfBtn.innerHTML = '<span>👁️</span> Hide PDF';
+                } else {
+                    pdfViewer.style.display = 'none';
+                    pdfPlaceholder.style.display = 'flex';
+                    viewPdfBtn.innerHTML = '<span>👁️</span> View PDF';
+                }
+            });
+            
+            // Descargar el PDF
+            downloadPdfBtn.addEventListener('click', function() {
+                // Crear un enlace temporal para descargar el archivo
+                const link = document.createElement('a');
+                link.href = pdfUrl;
+                link.download = 'software-developer-postulation-models.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Efecto visual de confirmación
+                const originalText = downloadPdfBtn.innerHTML;
+                downloadPdfBtn.innerHTML = '<span>✅</span> Downloaded!';
+                downloadPdfBtn.style.backgroundColor = '#4caf50';
+                
+                setTimeout(() => {
+                    downloadPdfBtn.innerHTML = originalText;
+                    downloadPdfBtn.style.backgroundColor = '';
+                }, 2000);
+            });
+            
+            // Cargar el PDF automáticamente si el navegador lo admite
+            // Verificar si el navegador puede mostrar PDFs incrustados
+            const canDisplayPdf = () => {
+                return navigator.mimeTypes['application/pdf'] !== undefined;
+            };
+            
+            // Intentar cargar el PDF automáticamente si es posible
+            if (canDisplayPdf()) {
+                // Pequeño retraso para mejorar la experiencia de usuario
+                setTimeout(() => {
+                    pdfViewer.src = pdfUrl + '#view=FitH';
+                    pdfViewer.style.display = 'block';
+                    pdfPlaceholder.style.display = 'none';
+                    viewPdfBtn.innerHTML = '<span>👁️</span> Hide PDF';
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
